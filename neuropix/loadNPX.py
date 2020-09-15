@@ -1,7 +1,7 @@
-from setup import *
+from __init__ import *
 from neuropix.loadNeuropix import *
 
-myKsDir = filepath
+myKsDir = FILEPATH
 
 # myEventTimes = load('C:\...\data\someEventTimes.mat'); # a vector of times in seconds of some event to align to
 
@@ -13,6 +13,7 @@ if full_path not in sys.path:
 #%% Loading data from kilosort/phy easily
 
 sp = loadKsDir(myKsDir)
+# breakpoint()
 
 #% sp.st are spike times in seconds
 #% sp.clu are cluster identities

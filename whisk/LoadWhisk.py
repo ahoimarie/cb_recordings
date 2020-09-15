@@ -30,11 +30,6 @@ if os.path.join("../hilbert_transform") not in sys.path:
     sys.path.insert(0, "../hilbert_transform")
 
 
-# =============================================================================
-# exptn = "MB013_cb_K_g0"
-# =============================================================================
-
-
 def loadWhiskerData(filepath):
     fileList = glob.glob(os.path.abspath(filepath) + '/*_whiskermeasurements.npy')
     import params as whiskdata
@@ -128,20 +123,19 @@ def loadWhiskerData(filepath):
         iisam = sam[iisw == True]
         isw_con = group_consecutives(iisam, step=1)  # connected components of whisking for each whisking bout
         ic = 0
-        tisw_isam = []  # % sample numbers
-        tiisw_ispk = []  # % sample numbers during which a spike was recorded
-        tisw_itop = []  # % sample numbers during the whisker position has a peak
-        tisw_pos = []  # % whisker position
-        tisw_phs = []  # % whisker phase
-        tisw_amp = []  # % whisker amplitude
-        tisw_spt = []  # % whisker set-point
-        tisw_sam = []  # % sample id
+        tisw_isam = []  # sample numbers
+        tiisw_ispk = []  # sample numbers during which a spike was recorded
+        tisw_itop = []  # sample numbers during the whisker position has a peak
+        tisw_pos = []  # whisker position
+        tisw_phs = []  # whisker phase
+        tisw_amp = []  # whisker amplitude
+        tisw_spt = []  # whisker set-point
+        tisw_sam = []  # sample id
         for iisw_temp in isw_con:
-            #  % looping over connected components of the vector iisw1 (each connected component is a whisking bout)
-            #  % the variables in each whisking bout (indexed by k) are put into the appropriate cell array
+            #  looping over connected components of the vector iisw1 (each connected component is a whisking bout)
+            #  the variables in each whisking bout (indexed by k) are put into the appropriate cell array
             k += 1
             tisw_isam.append(iisw_temp)
-            # tisw_ispk
             tisw_itop.append(np.intersect1d(itop, iisw_temp))
             tisw_pos.append(pos[iisw_temp])
             tisw_phs.append(phs[iisw_temp])
@@ -171,19 +165,6 @@ def loadWhiskerData(filepath):
         time.append(np.arange(0, max(sam) + 1) / float(sr))
 
     # %% Loading whiskers as eventTimes
-
-    # =============================================================================
-    # ftb,fta = butter(1,a/3)
-    # filtbut = filtfilt(ftb, fta, amp)
-    # plt.plot(filtbut)
-    #
-    # filtpos = filtfilt(a, [1,a-1], amp)
-    # plt.plot(filtpos)
-    #
-    # plt.figure()
-    # plt.plot(filtbut-filtpos)
-    # plt.show()
-    # =============================================================================
 
     eventTimes = []
     [eventTimes.append([item[0] / sr for item in isw_sam[j]]) for j in range(len(isw_sam))]

@@ -24,17 +24,24 @@ def loadKsDir(ksdir, *args):
         params = type('', (), {})()
 
     if not hasattr(params, 'excludeNoise'):  # ~isfield(params, 'excludeNoise'):
-        params.excludeNoise = True;
+        params.excludeNoise = True
 
     if not hasattr(params, 'loadPCs'):  # ~isfield(params, 'loadPCs'):
-        params.loadPCs = False;
+        params.loadPCs = False
 
     import sys
     full_path = os.path.join(ksdir)
     if full_path not in sys.path:
         sys.path.append(full_path)
 
+
+    # import importlib.util
+    # spec = importlib.util.spec_from_file_location("params", module_path)
+    # foo = importlib.util.module_from_spec(spec)
+    # spec.loader.exec_module(foo)
+
     import params as spikeStruct
+
     # breakpoint()
     ss = np.load(Path(full_path, "spike_times.npy"))
     # ss = np.load("spike_times.npy")

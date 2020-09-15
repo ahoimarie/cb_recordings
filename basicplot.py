@@ -1,4 +1,3 @@
-# %% histogram stuff histogram
 import seaborn as sns
 import numpy as np
 import matplotlib
@@ -11,14 +10,13 @@ from whisk.LoadWhisk import loadWhiskerData
 from neuropix.loadNPX import *
 sns.set(color_codes=True)
 
-whiskd = loadWhiskerData(filepath)
+whiskd = loadWhiskerData(FILEPATH)
 
 Fs = 299  # samples/s
 # binwidth = 0.1003; % 100.3 ms
 rsam = 15  # number of samples
 binwidth = rsam / Fs  # 50 ms % average over 15 samples
 
-# nsamp = max(isam);
 nsamp = max([i[-1] for i in whiskd.samp])
 # video sampling rate Fs = 299
 # binarise spike times
@@ -34,7 +32,7 @@ nwhisk = np.size(np.unique(whiskd.df.labels))
 
 # %% creating histograms of mean firing rate per bin at different positions
 whisking = True
-for whisker in range(1):# range(nwhisk):
+for whisker in range(1,2):# range(nwhisk):
     # whisker = 0
     locref = 'position'
 
@@ -87,16 +85,9 @@ for whisker in range(1):# range(nwhisk):
             b = b[isw_bin]
         allFR = [b[whichbin == ic] / binwidth for ic in np.unique(whichbin)]
         allFRm = [np.mean(b[whichbin == ic] / binwidth) for ic in np.unique(whichbin)]
-
-        # allFRd[cl] = allFR
-
         avgFRinloc.append(allFR)
 
         plt.subplot(acSize, acSize, cl + 1)
-        #    plt.bar(xedges[:-1], allFRm[:-1])
-        # sns.barplot(xedges[:-1], allFR[:-1])
-        # dfFR = pd.DataFrame(dict(x=xedges, y=allFR))
-        # ax = sns.barplot(x="x", y="y", data=dfFR, ci=68)
         ax = sns.barplot(data=allFR[:-1], ci=68)
         # ax.set_xticklabels(np.round(xedges[:-1:2], 2))
         ax.set(xticks=range(0, bin1, 2))
@@ -112,7 +103,7 @@ for whisker in range(1):# range(nwhisk):
     # plt.show()
     figManager = plt.get_current_fig_manager()
     figManager.resize(*figManager.window.maxsize())
-    # figManager.window.showMaximized()
+    # figManager.window.showMaximized() # different backend
     # plt.tight_layout()
 
     fname = "Mean firing rate vs " + locref + ", " + whiskd.mid + ", wh" + str(whisker) + ", bin " + str(
@@ -126,4 +117,12 @@ for whisker in range(1):# range(nwhisk):
     else:
         plt.savefig(figpath + '/' + fname + ".png")
 
-
+print("Done")
+#
+# if __name__ == "__main__":
+#     import sys
+#
+#     if len(sys.argv) <= 1:
+#         exit("Too few arguments calling script")
+#
+#     EXPTN = sys.argv[1]
