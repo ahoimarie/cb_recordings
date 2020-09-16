@@ -13,7 +13,7 @@ install:
   - pip install git+https://github.com/ahoimarie/hilbert.git@master#egg=hilb
   - pip install -r requirements.txt
 ignore:
-   - "../setup.py"
+   - "./setup.py"
 # command to run tests
 script:
   - pytest
