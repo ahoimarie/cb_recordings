@@ -21,7 +21,7 @@ with open('requirements.txt') as f:
 setup(
    name='cb_recordings',
    version='1.0',
-   license="BSD",
+   license="GPL-2.0 License",
    long_description=readme,
    description='A useful module',
    author='Marie Tolkiehn',

@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Feb 20 2020
+This code is based upon the Matlab implementation from the lab of Kenneth Harris and Matteo Carandini
+at UCL, available https://github.com/cortex-lab/spikes/
 
 @author: Marie Tolkiehn
 """

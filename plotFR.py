@@ -9,7 +9,7 @@ import numpy as np
 from scipy import stats
 from math import log2
 from __init__ import *
-from whisk.LoadWhisk import loadWhiskerData
+from whisk.loadWhisk import loadWhiskerData
 from neuropix.loadNeuropix import loadKsDir, process_spiketimes
 import matplotlib
 matplotlib.use('TkAgg')

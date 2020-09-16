@@ -1,5 +1,5 @@
-from setup import *
-from whisk.LoadWhisk import loadWhiskerData
+from __init__ import *
+from whisk.loadWhisk import loadWhiskerData
 
 
 whiskd = loadWhiskerData(filepath)

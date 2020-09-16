@@ -25,7 +25,7 @@ the whisker ID (0, 1, 2, ...) and the Angles to the measured angle of traced whi
 are wrapped to 0-360 degrees. FIDs and Angles are linearly interpolated for missing frames. This
 interpolation can be improved.
 
-Please see https://github.com/ahoimarie/spikes-preprocessing for more explanation.
+Please see https://github.com/ahoimarie/cb_recordings for more explanation.
 """
 
 import numpy as np
