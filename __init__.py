@@ -30,4 +30,3 @@ if figpath not in sys.path:
 # Load whisking data
 # if '../../' not in sys.path:
 #     sys.path.append('../../')
-
