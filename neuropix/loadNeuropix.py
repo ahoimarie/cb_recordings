@@ -83,20 +83,21 @@ def loadKsDir(ksdir, *args):
     ycoords = coords[:, 1]
     xcoords = coords[:, 0]
 
-    temps = np.load(Path(full_path, "templates.npy"))
-    winv = np.load(Path(full_path, "whitening_mat_inv.npy"))
+    # temps = np.load(Path(full_path, "templates.npy"))
+    # winv = np.load(Path(full_path, "whitening_mat_inv.npy"))
 
     spikeStruct.st = st.flatten()
     spikeStruct.spikeTemplates = spikeTemplates
     spikeStruct.clu = clu
     spikeStruct.tempScalingAmps = tempScalingAmps
     spikeStruct.cgs = cgs
+    # breakpoint()
     spikeStruct.cids = cids
     spikeStruct.depth = depth  # % added by Marie Tolkiehn
     spikeStruct.xcoords = xcoords
     spikeStruct.ycoords = ycoords
-    spikeStruct.temps = temps
-    spikeStruct.winv = winv
+    # spikeStruct.temps = temps
+    # spikeStruct.winv = winv
     spikeStruct.pcFeat = pcFeat
     spikeStruct.pcFeatInd = pcFeatInd
 

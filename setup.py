@@ -25,7 +25,7 @@ setup(
    long_description=readme,
    description='A useful module',
    author='Marie Tolkiehn',
-   author_email='marie_tol@hotmail.com',
+   author_email='marie+git@kent.nu',
    packages=_package_tree('cb_recordings'),
    install_requires=require,  # external packages as dependencies
    include_package_data=True
