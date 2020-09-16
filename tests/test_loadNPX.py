@@ -1,7 +1,4 @@
-# import numpy as np
 from neuropix.loadNeuropix import loadKsDir
-# from neuropix.loadNeuropix import process_spiketimes
-# from whisk.loadWhisk import loadWhiskerData
 import os
 import types
 script_dir = os.path.dirname(__file__)

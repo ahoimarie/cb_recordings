@@ -10,13 +10,14 @@ python:
   - "3.7"
 # command to install dependencies
 install:
-  - pip install git+https://github.com/ahoimarie/hilbert
+  - pip install git+https://github.com/ahoimarie/hilbert.git@master#egg=hilb
   - pip install -r requirements.txt
 ignore:
-   - "setup.py"
+   - "../setup.py"
 # command to run tests
 script:
-  - pytest --cov=./
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - pytest
+#  - pytest --cov=../
+#
+#after_success:
+#  - bash <(curl -s https://codecov.io/bash)

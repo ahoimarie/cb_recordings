@@ -34,9 +34,10 @@ from pathlib import Path
 import os.path
 import glob
 import sys
+from hilb.hilbert_transforms import phase_from_hilbert, get_slow_var
 
-if os.path.join("../hilbert_transform") not in sys.path:
-    sys.path.insert(0, "../hilbert_transform")
+# if os.path.join("../hilbert_transform") not in sys.path:
+#     sys.path.insert(0, "../hilbert_transform")
 
 
 def loadWhiskerData(filepath):
@@ -55,8 +56,8 @@ def loadWhiskerData(filepath):
     exptn = filepath.name[:-3]
 
 
-    from hilbert_transforms import phase_from_hilbert
-    from hilbert_transforms import get_slow_var
+    # from hilbert_transforms import phase_from_hilbert
+    # from hilbert_transforms import get_slow_var
 
     # %% prepare whisking parameters
     fid = df['fid']

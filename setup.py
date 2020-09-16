@@ -1,6 +1,5 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import os
-
 
 def _package_tree(pkgroot):
     path = os.path.dirname(__file__)
@@ -26,7 +25,7 @@ setup(
    description='A useful module',
    author='Marie Tolkiehn',
    author_email='marie+git@kent.nu',
-   packages=_package_tree('cb_recordings'),
+   packages=find_packages(exclude=('tests',)),#_package_tree('hilb'),
    install_requires=require,  # external packages as dependencies
    include_package_data=True
 )
