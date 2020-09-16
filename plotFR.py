@@ -157,12 +157,13 @@ for whisker in range(1, 2):  # range(nwhisk):
         plt.savefig(figpath + '/' + fname + ".png")
 
 print("Done")
-#
-# if __name__ == "__main__":
-#     import sys
-#
-#     if len(sys.argv) <= 1:
-#         exit("Too few arguments calling script")
-#
-#     EXPTN = sys.argv[1]
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) <= 1:
+        exit("Too few arguments calling script")
+
+    EXPTN = sys.argv[1]
 

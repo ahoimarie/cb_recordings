@@ -1,17 +1,18 @@
-import pytest
-import numpy as np
-from .neuropix.loadNeuropix import loadKsDir
+# import numpy as np
+from neuropix.loadNeuropix import loadKsDir
 # from neuropix.loadNeuropix import process_spiketimes
 # from whisk.loadWhisk import loadWhiskerData
 import os
 import types
 script_dir = os.path.dirname(__file__)
+from pathlib import Path
+
 
 def test_loadKsdir():
     rel_path = 'testfiles'
     FILEPATH = os.path.join(script_dir, rel_path)
     print(FILEPATH)
-    spikes = loadKsDir(FILEPATH)
+    spikes = loadKsDir(Path(FILEPATH))
     assert(isinstance(spikes,types.ModuleType))
 
 

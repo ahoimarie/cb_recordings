@@ -41,6 +41,11 @@ if os.path.join("../hilbert_transform") not in sys.path:
 
 def loadWhiskerData(filepath):
     fileList = glob.glob(os.path.abspath(filepath) + '/*_whiskermeasurements.npy')
+    import sys
+    full_path = os.path.join(filepath)
+    if full_path not in sys.path:
+        sys.path.append(full_path)
+
     import params as whiskdata
 
     whisk = np.load(Path(fileList[0]))
@@ -48,6 +53,7 @@ def loadWhiskerData(filepath):
     df = pd.DataFrame(whisk, columns=['fid', 'labels', 'angles'])
     df = df.astype({'fid': int, 'labels': int})
     exptn = filepath.name[:-3]
+
 
     from hilbert_transforms import phase_from_hilbert
     from hilbert_transforms import get_slow_var
@@ -57,8 +63,11 @@ def loadWhiskerData(filepath):
     angle = df['angles']
     label = df['labels']
     Fs = 299
+    try:
+        mid = exptn[0:6] + exptn[9]
+    except IndexError:
+        mid = exptn
 
-    mid = exptn[0:6] + exptn[9]
     # nwhisk = len(np.unique(label))
 
     sr = Fs
