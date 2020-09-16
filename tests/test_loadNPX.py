@@ -1,12 +1,10 @@
 import pytest
 import numpy as np
 from neuropix.loadNeuropix import loadKsDir
-from neuropix.loadNeuropix import process_spiketimes
-from whisk.loadWhisk import loadWhiskerData
+# from neuropix.loadNeuropix import process_spiketimes
+# from whisk.loadWhisk import loadWhiskerData
 import os
 import types
-from pathlib import Path
-
 script_dir = os.path.dirname(__file__)
 
 def test_loadKsdir():
