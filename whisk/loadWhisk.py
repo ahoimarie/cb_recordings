@@ -41,6 +41,9 @@ from hilb.hilbert_transforms import phase_from_hilbert, get_slow_var
 
 
 def loadWhiskerData(filepath):
+    """Load _whiskermeasurements.npy data and assign them to fid, labels and angles.
+    Process them further to create a class containing the whisker data with different parameters
+    such as times of whisking on each whisker, and the Hilbert transformed signals. """
     fileList = glob.glob(os.path.abspath(filepath) + '/*_whiskermeasurements.npy')
     import sys
     full_path = os.path.join(filepath)
@@ -60,9 +63,10 @@ def loadWhiskerData(filepath):
     # from hilbert_transforms import get_slow_var
 
     # %% prepare whisking parameters
-    fid = df['fid']
-    angle = df['angles']
-    label = df['labels']
+    # Interpolated values
+    fids = df['fid']
+    angles = df['angles']
+    labels = df['labels']
     Fs = 299
     try:
         mid = exptn[0:6] + exptn[9]
@@ -81,13 +85,8 @@ def loadWhiskerData(filepath):
     lag = 750  # % number of lags used to compute whisker autocorrelation
     tau = [x / sr for x in range(-lag, lag, 1)]  # % autocorrelation temporal lag vector
 
-    # Interpolated values
-    angles = angle  # % or 'angle'
-    fids = fid  # ;% or fid
-    labels = label  # ; % or label
-
     # maximum number of frames
-    nsamp = max(fid)
+    nsamp = max(fids)
 
     # for i = 1
     from scipy.signal import filtfilt, butter
@@ -98,7 +97,7 @@ def loadWhiskerData(filepath):
         nrec = len(np.unique(labels))
     k = 0
 
-    # for each whisking bout recorded we will have a cell array that contains
+    # for each whisking bout recorded we will have a list that contains
     # the following variables
     isw_isam = []  # sample numbers
     iisw_ispk = []  # sample numbers during which a spike was recorded
@@ -109,7 +108,7 @@ def loadWhiskerData(filepath):
     isw_spt = []  # whisker set-point
     isw_sam = []  # sample id
 
-    # arrays that will hold relevant information for each recording interval:
+    # lists that will hold relevant information for each recording interval:
     samp = []
     time = []
     phase = []
@@ -120,15 +119,15 @@ def loadWhiskerData(filepath):
     tops = []
     iswhisking = []  # a list of indices pointing to times where the animal was whisking
 
-    ACisw = np.zeros((2 * lag + 1, 100))  # % autocorrelation of whisker position during whisking
-    ACall = np.zeros((2 * lag + 1, nrec))  # % autocorrelation of whisker position during all times
+    ACisw = np.zeros((2 * lag + 1, 100))  # autocorrelation of whisker position during whisking
+    ACall = np.zeros((2 * lag + 1, nrec))  # autocorrelation of whisker position during all times
 
     for j in np.unique(labels):
-        pos = np.array(np.transpose(angles[labels == j]))  # % angle during recording
-        sam = np.array(np.transpose(fids[labels == j])) - 1  # % sample number
-        # spk = np.array(np.transpose(sp.st[sp.clu==sp.clu[i]]))  #% samples during which spike was recorded
+        pos = np.array(np.transpose(angles[labels == j]))  # angle during recording
+        sam = np.array(np.transpose(fids[labels == j])) - 1  # sample number
+        # spk = np.array(np.transpose(sp.st[sp.clu==sp.clu[i]]))  # samples during which spike was recorded
 
-        phs, _ = phase_from_hilbert(pos, sr, bp)  # % extracting phase from whisker position using hilbert transform
+        phs, _ = phase_from_hilbert(pos, sr, bp)  # extracting phase from whisker position using Hilbert transform
 
         amp, itop, ibot = get_slow_var(pos, phs, amp_func)
         spt, _, _ = get_slow_var(pos, phs, setpt_func)
@@ -176,7 +175,6 @@ def loadWhiskerData(filepath):
         samp.append(sam)
         phase.append(phs)
         amplitude.append(amp)
-        # spikes.append(spk)
         tops.append(itop)
         setpoint.append(spt)
         position.append(pos)
@@ -184,7 +182,7 @@ def loadWhiskerData(filepath):
         # mic.append(len(isw_con))
         time.append(np.arange(0, max(sam) + 1) / float(sr))
 
-    # %% Loading whiskers as eventTimes
+    # %% Loading whisking epochs as eventTimes
 
     eventTimes = []
     [eventTimes.append([item[0] / sr for item in isw_sam[j]]) for j in range(len(isw_sam))]
