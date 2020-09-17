@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/ahoimarie/cb_recordings.svg?token=USnpr24bQjvx6pPPWuJG&branch=master)](https://travis-ci.com/ahoimarie/cb_recordings)
+[![codecov](https://codecov.io/gh/ahoimarie/cb_recordings/branch/master/graph/badge.svg)](https://codecov.io/gh/ahoimarie/cb_recordings)
 
 # Electrophysiological recordings with Neuropixels and simultaneous High-Speed video (Dalsa Genie HM)
 
