@@ -1,4 +1,4 @@
-from __init__ import *
+from initparams import *
 from whisk.loadWhisk import loadWhiskerData
 
 

@@ -8,7 +8,7 @@ import seaborn as sns
 import numpy as np
 from scipy import stats
 from math import log2
-from __init__ import *
+from initparams import *
 from whisk.loadWhisk import loadWhiskerData
 from neuropix.loadNeuropix import loadKsDir, process_spiketimes
 import matplotlib

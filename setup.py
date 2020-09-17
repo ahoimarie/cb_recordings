@@ -5,7 +5,7 @@ def _package_tree(pkgroot):
     path = os.path.dirname(__file__)
     subdirs = [os.path.relpath(i[0], path).replace(os.path.sep, '.')
                for i in os.walk(os.path.join(path, pkgroot))
-               if '__init__.py' in i[2]]
+               if 'initparams.py' in i[2]]
     return subdirs
 
 

@@ -16,8 +16,8 @@ ignore:
    - "./setup.py"
 # command to run tests
 script:
-  - pytest
-#  - pytest --cov=./
+#  - pytest
+  - pytest --cov=./
 #
 #after_success:
 #  - bash <(curl -s https://codecov.io/bash)
