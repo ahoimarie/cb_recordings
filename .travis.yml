@@ -1,23 +1,34 @@
-
 # Using several other .travis.yml files as inspiration. See for example:
 # https://github.com/MOxUnit/MOxUnit
 # https://github.com/scottclowe/matlab-continuous-integration/
 # https://github.com/fieldtrip/fieldtrip/blob/master/.travis.yml
+env:
+  global:
+    - MATLAB_ROOT=/home/travis/build/matlab
+matrix:
+  include:
+    - language: matlab
+      matlab:
+        - latest
+        - R2020b
+    - language: python
+      python:
+        - "3.6"      # current default Python on Travis CI
+        - "3.7"
+      before_install:
+        - bash <(cd MATLAB_ROOT/extern/engines/python; python setup.py install)
+      # command to install dependencies
+      install:
+        - pip install git+https://github.com/ahoimarie/hilbert.git@master#egg=hilb
+        - pip install -r requirements.txt
+      ignore:
+         - "./setup.py"
+      # command to run tests
+      script:
+        - cd
+      #  - pytest
+        - pytest --cov=./
+      #
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
 
-language: python
-python:
-  - "3.6"      # current default Python on Travis CI
-  - "3.7"
-# command to install dependencies
-install:
-  - pip install git+https://github.com/ahoimarie/hilbert.git@master#egg=hilb
-  - pip install -r requirements.txt
-ignore:
-   - "./setup.py"
-# command to run tests
-script:
-#  - pytest
-  - pytest --cov=./
-#
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
