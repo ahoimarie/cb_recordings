@@ -22,7 +22,6 @@ matrix:
          - "./setup.py"
       # command to run tests
       script:
-        - cd
       #  - pytest
         - pytest --cov=./
       #
