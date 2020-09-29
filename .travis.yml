@@ -19,8 +19,7 @@ matrix:
         - "3.6"      # current default Python on Travis CI
         - "3.7"
       before_install:
-        - cd $MATLABROOT/extern/engines/python
-        - python setup.py install
+        - python  $MATLABROOT/extern/engines/python/setup.py install
       # command to install dependencies
       install:
         - pip install git+https://github.com/Calysto/matlab_kernel
