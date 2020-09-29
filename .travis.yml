@@ -11,6 +11,8 @@ matrix:
       matlab:
         - latest
         - R2020b
+      script:
+        - cd (fullfile(matlabroot,'extern','engines','python')); system('python setup.py install')
     - language: python
       python:
         - "3.6"      # current default Python on Travis CI
