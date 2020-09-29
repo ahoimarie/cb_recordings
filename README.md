@@ -1,29 +1,62 @@
 [![Build Status](https://travis-ci.com/ahoimarie/cb_recordings.svg?token=USnpr24bQjvx6pPPWuJG&branch=master)](https://travis-ci.com/ahoimarie/cb_recordings)
 [![codecov](https://codecov.io/gh/ahoimarie/cb_recordings/branch/master/graph/badge.svg)](https://codecov.io/gh/ahoimarie/cb_recordings)
 
+
 # Electrophysiological recordings with Neuropixels and simultaneous High-Speed video (Dalsa Genie HM)
 
 This repository allows you to load and process both the tracked, 
 traced whisker data (assuming whisker videos were processed on [Janelia's whisker tracker](https://wiki.janelia.org/wiki/display/MyersLab/Whisker+Tracking)) 
 and [Neuropixels](https://www.neuropixels.org) data that were spike-sorted using [Kilosort2](https://github.com/MouseLand/Kilosort2). 
 
-This repository contains functions to open the spike-sorted [Neuropixels](https://www.neuropixels.org) data as well as processed whisking data in *python*. 
+This repository contains functions (`loadNeuropix.py`) to open the spike-sorted [Neuropixels](https://www.neuropixels.org) data as well as processed whisking (`loadWhisk.py`) data in *python*. 
 
-The Neuropixels module `loadKSdir` is based upon the Matlab implementation of it from the lab of Kenneth Harris and Matteo Carandini at UCL, available on the [Cortex Lab Github page](https://github.com/cortex-lab/spikes/). 
+The Neuropixels module `loadKSdir` is heavily based upon the Matlab implementation of it from the lab of Kenneth Harris and Matteo Carandini at UCL, available on the [Cortex Lab Github page](https://github.com/cortex-lab/spikes/). 
 
 The **whisking module** loads the whisking data and extracts the parts of the recording where whisking was detected.
 Whisking parameter extraction is translated from and based on the script that accompanies the Primer [Analysis of Neuronal Spike
 Trains, Deconstructed", by J. Aljadeff, B.J. Lansdell, A.L. Fairhall and D. Kleinfeld (2016) Neuron,
 91](http://dx.doi.org/10.1016/j.neuron.2016.05.039). 
 
+This respository depends on the repository [Hilbert Transform](https://github.com/ahoimarie/hilbert). 
 
-## Assumptions: 
+The example script `plotFR.py` illustrates the use of the packages. `plotFR` computes the binned spike counts over the averaged whisker position. 
+
+
+**Assumptions**: 
 * You have read the relevant information on [Neuropixels](https://www.neuropixels.org), and read through the [Neuropixels github](https://github.com/cortex-lab/neuropixels/wiki). 
-* You have read the documentation on [Spike Glx](https://billkarsh.github.io/SpikeGLX/), including any subcategories. They like to update things every now and then, so keep checking.  
+* You have read the documentation on [Spike GLX](https://billkarsh.github.io/SpikeGLX/), including any subcategories. They like to update things every now and then, so keep checking.  
 * You have read the documentation on [Kilosort2](https://github.com/MouseLand/Kilosort2)
 * You have read the documentation on [Phy](https://github.com/cortex-lab/phy)
 * You have read the documentation on [whisker tracking](https://wiki.janelia.org/wiki/display/MyersLab/Whisker+Tracking) and [Nathan Clack's github](https://github.com/nclack/whisk) and [ffmpeg](https://ffmpeg.org). 
 * The time-consuming manual spike sorting is carried out as discussed e.g. [Phy](https://phy.readthedocs.io/en/latest/) or [at Kilosort2](https://github.com/MouseLand/Kilosort2). 
+
+## Data Acquisition Equipment:
+**Video Acquisition**
+* [StreamPix 7.5.0.0 (x64)](https://www.norpix.com/products/streampix/streampix.php)
+* Cable - CAT6-1^S-V-5m - RJ45
+* Lens for sensor size up to 2/3", focal length 16 mm - KOWA LM16JC 
+* High density LED backlight - METAPHASE MB-BL29X37-IR850-24
+* Bandpass filter IR (MIDOPT FIL BP850/27)
+* Stabilized external power supply for illumination (PSU 24V/3A)
+* [Teledyne Dalsa GigE camera](https://www.stemmer-imaging.com/media/uploads/docmanager/65281-Teledyne_DALSA_Genie_HM-HC_Series_Manual.pdf)
+
+**Neural Data Acquisition**
+* [Spike GLX](https://billkarsh.github.io/SpikeGLX/)
+* [Neuropixels](https://www.neuropixels.org)
+* SMA Adapter: RF Solutions, ADP-SMAM-BNCF Adapter SMA Male to BNC Female
+
+**National Instruments**
+* NI PXIe-1071, 4-Slot 3U PXI Express Chassis
+* NI PXIe-PCIe8381,x8 Gen2 MXI- Express for PXI Express Interface, 3 m
+* PXIe-6341, X Series DAQ (16 AI, 24 DIO, 2 AO)
+* BNC-2110 Noise Rejecting, Shielded BNC Connector Block
+* SHC68-68-EP Shielded Cable, 68 D- Type to 68 VHDCI Offset, 2 m
+
+**Extras**
+* [Uninterruptible power source](https://uk.rs-online.com/web/p/ups-uninterruptible-power-supplies/7127076/)
+
+
+
 
 ***
 ***
