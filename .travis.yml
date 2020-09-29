@@ -11,7 +11,6 @@ python:
 # command to install dependencies
 install:
   - pip install git+https://github.com/ahoimarie/hilbert.git@master#egg=hilb
-  - pip install git+https://github.com/kwikteam/npy-matlab.git@master#egg=npy-matlab
   - pip install -r requirements.txt
 ignore:
    - "./setup.py"
