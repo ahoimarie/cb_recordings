@@ -2,9 +2,6 @@
 # https://github.com/MOxUnit/MOxUnit
 # https://github.com/scottclowe/matlab-continuous-integration/
 # https://github.com/fieldtrip/fieldtrip/blob/master/.travis.yml
-env:
-  global:
-    - MATLAB_ROOT=/home/travis/build/matlab
 matrix:
   include:
     - language: matlab
@@ -17,8 +14,6 @@ matrix:
       python:
         - "3.6"      # current default Python on Travis CI
         - "3.7"
-      before_install:
-        - bash <(cd MATLAB_ROOT/extern/engines/python; python setup.py install)
       # command to install dependencies
       install:
         - pip install git+https://github.com/ahoimarie/hilbert.git@master#egg=hilb
