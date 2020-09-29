@@ -2,9 +2,7 @@
 # https://github.com/MOxUnit/MOxUnit
 # https://github.com/scottclowe/matlab-continuous-integration/
 # https://github.com/fieldtrip/fieldtrip/blob/master/.travis.yml
-env:
-  global:
-    - MATLABROOT=~/matlab
+
 matrix:
   include:
     - language: matlab
@@ -13,7 +11,7 @@ matrix:
         - R2020b
       script:
 #        - cd (fullfile(matlabroot,'extern','engines','python')); system('python setup.py install');
-        - matlab -batch '$MATLABROOT = matlabroot; disp(matlabroot)'
+        - matlab -batch 'MATLABROOT = matlabroot; disp(matlabroot)'
     - language: python
       python:
         - "3.6"      # current default Python on Travis CI
