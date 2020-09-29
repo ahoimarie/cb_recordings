@@ -6,14 +6,13 @@ import os
 def test_conv_meas():
     """This test creates a numpy array and deletes it if the test passed. """
     eng = matlab.engine.start_matlab()
-    filename = 'Ga_rc'
+    filename = 'tests/testfiles/Ga_rc'
     print(eng.pwd())
-    # eng.addpath(eng.genpath('~/uob/npx_processing/recordings/whiskiconversion'))
-    eng.addpath(eng.genpath('../../whiskiconversion'))
+    eng.addpath(eng.genpath('whiskiconversion'))
     eng.conv_meas_py(filename)
     eng.quit()
 
-    my_testfile = Path("Ga_whiskermeasurements.npy")
+    my_testfile = Path("tests/testfiles/Ga_whiskermeasurements.npy")
     assert( my_testfile.is_file())
     if my_testfile.is_file():
         os.remove(my_testfile)

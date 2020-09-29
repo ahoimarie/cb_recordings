@@ -1,6 +1,6 @@
 # from neuropix.loadNeuropix import loadKsDir
 from examples.helperfncts import whiskingpos
-from whisk.loadWhisk import loadWhiskerData
+from whiskers.loadWhisk import loadWhiskerData
 import os
 import numpy as np
 # import types

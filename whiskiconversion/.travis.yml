@@ -9,7 +9,7 @@ python:
   - "3.7"
 # command to install dependencies
 install:
-  - pip install git+https://github.com/nclack/whisk/master.git@master#egg=matlab
+  - pip install git+https://github.com/nclack/whiskers/master.git@master#egg=matlab
   - pip install git+https://github.com/ahoimarie/hilbert.git@master#egg=hilb
   - pip install git+https://github.com/kwikteam/npy-matlab.git@master#egg=npy-matlab
   - pip install -r requirements.txt

@@ -1,11 +1,11 @@
-from whisk.loadWhisk import loadWhiskerData
+from whiskers.loadWhisk import loadWhiskerData
 import os
 import types
 script_dir = os.path.dirname(__file__)
 from pathlib import Path
 # import sys
-# if '../whisk/' not in sys.path:
-#     sys.path.insert(0, '../whisk/')
+# if '../whiskers/' not in sys.path:
+#     sys.path.insert(0, '../whiskers/')
 
 def test_loadwhiskerdata():
     rel_path = './testfiles'
