@@ -20,69 +20,72 @@ from examples.helperfncts import position_fr_plot,whiskingpos
 #------------------------------------------------------------------------------
 # Load and process
 #------------------------------------------------------------------------------
-whiskd = loadWhiskerData(FILEPATH)
-sp = loadKsDir(FILEPATH)
-sp = process_spiketimes(sp)
+def plotFiringRates(FILEPATH,figpath):
 
-locref = "position"
-whisking = False
-Fs = 299  # samples/s, video sampling rate Fs = 299
-# binwidth = 0.1003; % 100.3 ms
-rsam = 15  # number of samples
-binwidth = rsam / Fs  # 50 ms % average over 15 samples
-nsamp = max([i[-1] for i in whiskd.samp])
-# binarise spike times
-edges = np.arange(0, nsamp / Fs, binwidth)
+    whiskd = loadWhiskerData(FILEPATH)
+    sp = loadKsDir(FILEPATH)
+    sp = process_spiketimes(sp)
 
-# Create spike count in non-overlapping individual time bins
-sp.stc = []
-for cl in range(0, len(np.unique(sp.clu))):
-    nb, edg = np.histogram(sp.st[sp.clu == sp.cidsSorted[cl]], bins=edges)  # sorted by depth
-    sp.stc.append(nb)  # % spike count
+    locref = "position"
+    whisking = False
+    Fs = 299  # samples/s, video sampling rate Fs = 299
+    # binwidth = 0.1003; % 100.3 ms
+    rsam = 15  # number of samples
+    binwidth = rsam / Fs  # 50 ms % average over 15 samples
+    nsamp = max([i[-1] for i in whiskd.samp])
+    # binarise spike times
+    edges = np.arange(0, nsamp / Fs, binwidth)
 
-# nb should be the size len(whiskervar[:int(np.size(whiskervar)/rsam)*rsam])/rsam
+    # Create spike count in non-overlapping individual time bins
+    sp.stc = []
+    for cl in range(0, len(np.unique(sp.clu))):
+        nb, edg = np.histogram(sp.st[sp.clu == sp.cidsSorted[cl]], bins=edges)  # sorted by depth
+        sp.stc.append(nb)  # % spike count
 
-nwhisk = np.size(np.unique(whiskd.df.labels))  # number of whiskers
+    # nb should be the size len(whiskervar[:int(np.size(whiskervar)/rsam)*rsam])/rsam
 
-# %% creating histograms of mean firing rate per bin at different positions
-#------------------------------------------------------------------------------
-# Calculate average position and average firing rate for each cell
-#------------------------------------------------------------------------------
+    nwhisk = np.size(np.unique(whiskd.df.labels))  # number of whiskers
 
-for whisker in range(1, 2):  # range(nwhisk):
+    # %% creating histograms of mean firing rate per bin at different positions
+    #------------------------------------------------------------------------------
+    # Calculate average position and average firing rate for each cell
+    #------------------------------------------------------------------------------
 
-    average_position, isw_bin = whiskingpos(whiskd, len(nb),edges, whisker, rsam, whisking)
-    # binsizes
-    # getting the optimal number of bins
-    bin1 = round(1 + log2(np.size(average_position)))
-    xedges = np.linspace(min(average_position), max(average_position), bin1 + 1)
+    for whisker in range(0, 1):  # range(nwhisk):
 
-    # calculate histogram over spatial position to get frequency of each location
-    [pos, edg] = np.histogram(average_position, xedges, density=True)
-    whichbin = np.digitize(average_position, xedges)
+        average_position, isw_bin = whiskingpos(whiskd, len(nb),edges, whisker, rsam, whisking)
+        # binsizes
+        # getting the optimal number of bins
+        bin1 = round(1 + log2(np.size(average_position)))
+        xedges = np.linspace(min(average_position), max(average_position), bin1 + 1)
 
-    plt.close('all')
-    position_fr_plot(sp, pos, isw_bin, whichbin, whisking)
+        # calculate histogram over spatial position to get frequency of each location
+        [pos, edg] = np.histogram(average_position, xedges, density=True)
+        whichbin = np.digitize(average_position, xedges)
 
-    fname = "Mean firing rate vs " + locref + ", " + whiskd.mid + ", wh" + str(whisker) + ", bin " + str(
-        round(binwidth * 1000, 2)) + "ms, whisking " + str(whisking) + ", depthsorted"
+        plt.close('all')
+        position_fr_plot(sp, pos, isw_bin, whichbin, binwidth, bin1, xedges, whisking)
 
-    plt.suptitle(fname)
+        fname = "Mean firing rate vs " + locref + ", " + whiskd.mid + ", wh" + str(whisker) + ", bin " + str(
+            round(binwidth * 1000, 2)) + "ms, whisking " + str(whisking) + ", depthsorted"
 
-    figname = figpath + '/' + fname + ".png"
-    if Path(figname).exists():
-        print("Filename already exists, did not save.")
-    else:
-        plt.savefig(figpath + '/' + fname + ".png")
+        plt.suptitle(fname)
 
-print("Done")
+        figname = figpath + '/' + fname + ".png"
+        if Path(figname).exists():
+            print("Filename already exists, did not save.")
+        else:
+            plt.savefig(figpath + '/' + fname + ".png")
+
+    return print("Done")
 
 
 if __name__ == "__main__":
-    import sys
+    # import sys
+    # if len(sys.argv) <= 1:
+    #     exit("Too few arguments calling script")
+    #
+    # EXPTN = sys.argv[1]
 
-    if len(sys.argv) <= 1:
-        exit("Too few arguments calling script")
-
-    EXPTN = sys.argv[1]
+    plotFiringRates(FILEPATH,figpath)
 

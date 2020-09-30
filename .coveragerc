@@ -1,2 +1,2 @@
 [run]
-omit = setup.py, *WIP*
+omit = setup.py, *WIP*,tests/*

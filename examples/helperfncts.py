@@ -1,7 +1,9 @@
 from scipy import stats
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-def position_fr_plot(sp, avgpos, isw_bin, whichbin, whisking=True):
+def position_fr_plot(sp, avgpos, isw_bin, whichbin, binwidth, bin1, xedges, whisking=True):
     """Plot average firing rates at each binned whisker position. """
     # for each cell
     acSize = int(np.ceil(np.sqrt(len(sp.stc))))
