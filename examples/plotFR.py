@@ -11,7 +11,10 @@ from initparams import *
 from whiskers.loadWhisk import loadWhiskerData
 from neuropix.loadNeuropix import loadKsDir, process_spiketimes
 import matplotlib
-matplotlib.use('TkAgg')
+import platform
+if platform.system() is "Darwin":
+    matplotlib.use('TkAgg')
+# elif platform.system() is "Linux":
 import matplotlib.pyplot as plt
 sns.set(color_codes=True)
 plt.rcParams.update({'font.size': 10})
