@@ -11,8 +11,6 @@ script_dir = os.path.dirname(__file__)
 from pathlib import Path
 import pytest
 
-FILEPATH = None
-
 @pytest.fixture(scope="session")
 def get_whiskerdata():
     rel_path = './testfiles'
@@ -20,13 +18,13 @@ def get_whiskerdata():
     whiskerdata = loadWhiskerData(Path(FILEPATH))
     return whiskerdata
 
-@pytest.fixture(scope='session')
-def get_spikedata():
-    rel_path = './testfiles'
-    FILEPATH = os.path.join(script_dir,rel_path)
-    sp = loadKsDir(FILEPATH)
-    sp = process_spiketimes(sp)
-    return sp
+# @pytest.fixture(scope='session')
+# def get_spikedata():
+#     rel_path = './testfiles'
+#     FILEPATH = os.path.join(script_dir,rel_path)
+#     sp = loadKsDir(FILEPATH)
+#     sp = process_spiketimes(sp)
+#     return sp
 
 
 @pytest.mark.parametrize('whisking, avglen, lenisw', [
@@ -59,7 +57,7 @@ def test_always_passes():
 #     assert False
 
 if __name__ == "__main__":
-    # test_whiskingpos()
-    test_whiskingposFX(get_whiskerdata, whisking, avglen, lenisw)
+    test_whiskingposFX()
+    # test_whiskingposFX(get_whiskerdata, whisking, avglen, lenisw)
     test_plotFR()
     print("Everything passed")
