@@ -22,41 +22,11 @@ setup(
    version='1.0',
    license="GPL-2.0 License",
    long_description=readme,
-   description='A useful module',
+   description='A module to load whisking and Neuropixels data.',
    author='Marie Tolkiehn',
    author_email='marie+git@kent.nu',
-   packages=find_packages(exclude=('tests',)),#_package_tree('hilb'),
+   # packages=find_packages(exclude=('tests',)),#_package_tree('hilb'),
+   packages=_package_tree('neuropix','whiskers','examples'),
    install_requires=require,  # external packages as dependencies
    include_package_data=True
 )
-
-#
-# from pathlib import Path
-# import os.path
-# import sys
-#
-# EXPTN = "MB020_cb_R_g0"
-#
-# root = Path("../")
-# FILEPATH = Path(os.path.join("/Volumes/bunaken/Marie", "npx", EXPTN))
-#
-# figpath = "figs"
-# # figpath = root / ".." / "npx" / "figs"
-#
-# # if FILEPATH.exists():
-#     # module_path = '/params'
-# module_path = os.path.join(FILEPATH, 'params.py')
-# if module_path not in sys.path:
-#     sys.path.append(module_path)
-#
-# full_path = os.path.join(FILEPATH)
-# if full_path not in sys.path:
-#     sys.path.append(full_path)
-#
-# figpath = os.path.join(figpath)
-# if figpath not in sys.path:
-#     sys.path.append(figpath)
-#
-# # Load whisking data
-# if '../../' not in sys.path:
-#     sys.path.append('../../')

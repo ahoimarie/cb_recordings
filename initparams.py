@@ -26,7 +26,3 @@ if full_path not in sys.path:
 figpath = os.path.join(figpath)
 if figpath not in sys.path:
     sys.path.append(figpath)
-
-# Load whisking data
-# if '../../' not in sys.path:
-#     sys.path.append('../../')
