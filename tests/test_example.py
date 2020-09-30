@@ -3,6 +3,8 @@ from examples.helperfncts import whiskingpos
 from whiskers.loadWhisk import loadWhiskerData
 from neuropix.loadNeuropix import loadKsDir, process_spiketimes
 from examples.plotFR import plotFiringRates
+import matplotlib
+matplotlib.use('TkAgg')
 
 import os
 import numpy as np
