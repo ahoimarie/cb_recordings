@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 import os
 
-def _package_tree(pkgroot):
-    path = os.path.dirname(__file__)
-    subdirs = [os.path.relpath(i[0], path).replace(os.path.sep, '.')
-               for i in os.walk(os.path.join(path, pkgroot))
-               if 'initparams.py' in i[2]]
-    return subdirs
+# def _package_tree(pkgroot):
+#     path = os.path.dirname(__file__)
+#     subdirs = [os.path.relpath(i[0], path).replace(os.path.sep, '.')
+#                for i in os.walk(os.path.join(path, pkgroot))
+#                if 'initparams.py' in i[2]]
+#     return subdirs
 
 
 curdir = os.path.dirname(os.path.realpath(__file__))
@@ -25,8 +25,8 @@ setup(
    description='A module to load whisking and Neuropixels data.',
    author='Marie Tolkiehn',
    author_email='marie+git@kent.nu',
-   # packages=find_packages(exclude=('tests',)),#_package_tree('hilb'),
-   packages=_package_tree('neuropix','whiskers','examples'),
+   packages=find_packages(exclude=('tests',)),
+   # packages=_package_tree('neuropix'),
    install_requires=require,  # external packages as dependencies
    include_package_data=True
 )
