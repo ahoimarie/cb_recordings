@@ -1,3 +1,4 @@
+# test_example.py
 # from neuropix.loadNeuropix import loadKsDir
 from examples.helperfncts import whiskingpos
 from whiskers.loadWhisk import loadWhiskerData
@@ -5,13 +6,13 @@ from neuropix.loadNeuropix import loadKsDir, process_spiketimes
 from examples.plotFR import plotFiringRates
 import matplotlib
 matplotlib.use('TkAgg')
-
 import os
 import numpy as np
-# import types
-script_dir = os.path.dirname(__file__)
 from pathlib import Path
 import pytest
+# import types
+script_dir = os.path.dirname(__file__)
+
 
 @pytest.fixture(scope="session")
 def get_whiskerdata():
@@ -49,6 +50,8 @@ def test_plotFR():
     # rel_path = './testfiles'
     rel_path = './testfiles'
     FILEPATH = os.path.join(script_dir, rel_path)
+    import matplotlib
+    matplotlib.use('TkAgg')
     outp = plotFiringRates(Path(FILEPATH),FILEPATH)
     assert(print("Done") == outp)
 
