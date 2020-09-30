@@ -33,11 +33,7 @@ import pandas as pd
 from pathlib import Path
 import os.path
 import glob
-import sys
 from hilb.hilbert_transforms import phase_from_hilbert, get_slow_var
-
-# if os.path.join("../hilbert_transform") not in sys.path:
-#     sys.path.insert(0, "../hilbert_transform")
 
 
 def loadWhiskerData(filepath):

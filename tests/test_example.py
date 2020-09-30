@@ -59,5 +59,5 @@ def test_always_passes():
 if __name__ == "__main__":
     test_whiskingposFX()
     # test_whiskingposFX(get_whiskerdata, whisking, avglen, lenisw)
-    test_plotFR()
+    # test_plotFR()
     print("Everything passed")
