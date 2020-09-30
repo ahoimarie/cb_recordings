@@ -14,7 +14,8 @@ import matplotlib
 import platform
 if platform.system() is "Darwin":
     matplotlib.use('TkAgg')
-# elif platform.system() is "Linux":
+elif platform.system() is "Linux":
+    matplotlib.use("Qt5Agg")
 import matplotlib.pyplot as plt
 sns.set(color_codes=True)
 plt.rcParams.update({'font.size': 10})
