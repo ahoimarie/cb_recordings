@@ -1,27 +1,35 @@
-
 # Using several other .travis.yml files as inspiration. See for example:
 # https://github.com/MOxUnit/MOxUnit
 # https://github.com/scottclowe/matlab-continuous-integration/
 # https://github.com/fieldtrip/fieldtrip/blob/master/.travis.yml
-
-language: python, matlab
-matlab:
-  - latest
-  - R2020b
-python:
-  - "3.6"      # current default Python on Travis CI
-  - "3.7"
-# command to install dependencies
-install:
-  - pip install git+https://github.com/ahoimarie/hilbert.git@master#egg=hilb
-  - pip install -r requirements.txt
-ignore:
-   - "./setup.py"
-# command to run tests
-script:
-  - cd
-#  - pytest
-  - pytest --cov=./
-#
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+env:
+  global:
+    $MATLABROOT = /usr/local/matlab/R2009b
+matrix:
+  include:
+    - language: matlab
+      matlab:
+        - latest
+        - R2020b
+#      script:
+#        - cd (fullfile(matlabroot,'extern','engines','python')); system('python setup.py install');
+#        - matlab -batch '$MATLABROOT = matlabroot; disp(matlabroot)'
+    - language: python
+      python:
+        - "3.6"      # current default Python on Travis CI
+        - "3.7"
+      before_install:
+        - python  $MATLABROOT/extern/engines/python/setup.py install
+      # command to install dependencies
+      install:
+        - pip install git+https://github.com/ahoimarie/hilbert.git@master#egg=hilb
+        - pip install -r requirements.txt
+      ignore:
+         - "./setup.py"
+      # command to run tests
+      script:
+      #  - pytest
+        - pytest --cov=./
+      #
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
