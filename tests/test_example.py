@@ -50,8 +50,6 @@ def test_plotFR():
     # rel_path = './testfiles'
     rel_path = './testfiles'
     FILEPATH = os.path.join(script_dir, rel_path)
-    import matplotlib
-    matplotlib.use('TkAgg')
     outp = plotFiringRates(Path(FILEPATH),FILEPATH)
     assert(print("Done") == outp)
 
