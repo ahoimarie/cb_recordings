@@ -3,6 +3,8 @@ from scipy import stats
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import platform
+
 
 def position_fr_plot(sp, avgpos, isw_bin, whichbin, binwidth, bin1, xedges, whisking=True):
     """Plot average firing rates at each binned whisker position. """
@@ -42,7 +44,8 @@ def position_fr_plot(sp, avgpos, isw_bin, whichbin, binwidth, bin1, xedges, whis
     plt.subplots_adjust(left=left, bottom=bottom, right=right, top=top, wspace=wspace, hspace=hspace)
     # plt.show()
     figManager = plt.get_current_fig_manager()
-    figManager.resize(*figManager.window.maxsize())
+    if platform.system() is "Darwin":
+        figManager.resize(*figManager.window.maxsize())
     # figManager.window.showMaximized() # different backend
     # plt.tight_layout()
     return ax
